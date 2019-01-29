@@ -1,0 +1,1 @@
+INSERT INTO users (fname, lname, username, password, email, isAdmin) VALUES ("Root","Root","root","U2FsdGVkX187scyefn7az0LaUmfklwOUJyl88LEiqks=","admin@mystocks.com",1);

@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>Profile</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.js"></script>
+    <!-- Font Awesomne -->
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,700" rel="stylesheet">
+    <link href="../css/admin.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.2/rollups/aes.js"></script>
+
+</head>
+
+<body>
+    <body style='font-family: "Roboto", sans-serif;'>
+        <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm">
+          <h5 class="my-0 mr-md-auto font-weight-normal" style="letter-spacing:1.5px; text-transform: uppercase;">My Stocks | Admin</h5>
+          <a class="btn" style="font-weight: 700; letter-spacing:1.5px; text-transform: uppercase;" id="delete-account">Delete Admin Account</a>
+          <a class="btn btn-outline-primary" style="font-weight: 700; letter-spacing:1.5px; text-transform: uppercase;" id="logged" href="/myStocks-2.0.3.RELEASE/views/signin.html">Log In</a>
+        </div>
+
+    <div class="container">
+        <div class="row" align="center">
+            <div class="col-sm-12">
+                <div class="card shadow-lg p-3 mb-5 rounded">
+                        <form class="form-update">
+                            <div style="letter-spacing: 2px;">Promote User to Admin</div>
+                            <label for="promote-username" class="sr-only">Username</label>
+                            <input type="username" id="promote-username" class="form-control" placeholder="Username" required>
+                            <button type="button" class="btn btn-lg btn-primary btn-block" id="promote">Promote</button>
+                            <div style="letter-spacing: 2px;">Demote Admin to User (only root admin access)</div>
+                            <label for="demote-username" class="sr-only">Username</label>
+                            <input type="username" id="demote-username" class="form-control" placeholder="Username" required>
+                            <button type="button" class="btn btn-lg btn-primary btn-block" id="demote">Demote</button>
+                            <div style="letter-spacing: 2px;">Delete User</div>
+                            <label for="delete-username" class="sr-only">Username</label>
+                            <input type="username" id="delete-username" class="form-control" placeholder="Username" required>
+                            <button type="button" class="btn btn-lg btn-primary btn-block" id="delete">Delete</button>
+                            <div style="letter-spacing: 2px;">Get User's Favorites</div>
+                            <label for="get-favorites" class="sr-only">Username</label>
+                            <input type="username" id="get-favorites" class="form-control" placeholder="Username" required>
+                            <button type="button" class="btn btn-lg btn-primary btn-block" id="favorites">View Favorites</button>
+                        </form>
+                        <ul class="list-group list-group-flush" id="userFavorites">
+                        </ul>
+                </div>
+            </div>
+        </div>
+        <!-- <div class="row" align="center">
+            <div class="col-sm-12">
+                <div class="card shadow-lg p-3 mb-5 rounded" id="userFavorites">
+                    <ul class="list-group list-group-flush">
+                    </ul>
+                </div>
+            </div>
+        </div> -->
+    </div>
+
+    <script src="../js/admin.js"></script>
+</body>
+
+</html>
