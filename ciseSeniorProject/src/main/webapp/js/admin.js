@@ -1,7 +1,7 @@
 var username = undefined;
 
 if (!isLoggedIn()) 
-    window.location.assign('/myStocks-2.0.3.RELEASE/views/signin.html');
+    window.location.assign('/views/signin.html');
 else {
     document.getElementById("logged").innerHTML = "Log Out";
 }
@@ -15,21 +15,21 @@ document.getElementById("logged").onclick = function() {
     }
 }
 
-httpGetAsync("/myStocks-2.0.3.RELEASE/myStocks/users/" + username, function(data) {
+httpGetAsync("/ciseSeniorProject/users/" + username, function(data) {
     if(data.isAdmin != 1) {
-        window.location.assign('/myStocks-2.0.3.RELEASE/index.html');
+        window.location.assign('/index.html');
     }
 });
 
 document.getElementById("delete-account").onclick = function () {
     if(username != "root") {
-        httpDeleteAsync("/myStocks-2.0.3.RELEASE/myStocks/users/" + username, function(data) {
+        httpDeleteAsync("/ciseSeniorProject/users/" + username, function(data) {
             console.log(data);
                 if (data >= 300) {
                     alert("Something went wrong, please try again");
                 } else {
                     document.cookie="username=;path=/;"
-                    window.location.assign("/myStocks-2.0.3.RELEASE/views/signin.html");
+                    window.location.assign("/views/signin.html");
                 }
         });
     }
@@ -40,24 +40,24 @@ document.getElementById("delete-account").onclick = function () {
 
 document.getElementById("delete").onclick = function () {
     var deletionUsername = document.getElementById("delete-username").value;
-    httpDeleteAsync("/myStocks-2.0.3.RELEASE/myStocks/users/" + deletionUsername, function(data) {
+    httpDeleteAsync("/ciseSeniorProject/users/" + deletionUsername, function(data) {
         console.log(data);
             if (data >= 300) {
                 alert("Something went wrong, please try again");
             } else {
-                window.location.assign("/myStocks-2.0.3.RELEASE/views/admin.html")
+                window.location.assign("/views/admin.html")
             }
     });
 }
 
 document.getElementById("promote").onclick = function () {
     var promotionUsername = document.getElementById("promote-username").value;
-    httpPutAsync("/myStocks-2.0.3.RELEASE/myStocks/users/promote/" + promotionUsername, function(data) {
+    httpPutAsync("/ciseSeniorProject/users/promote/" + promotionUsername, function(data) {
         console.log(data);
             if (data >= 300) {
                 alert("Something went wrong, please try again");
             } else {
-                window.location.assign("/myStocks-2.0.3.RELEASE/views/admin.html");
+                window.location.assign("/views/admin.html");
             }
     });
 }
@@ -65,18 +65,18 @@ document.getElementById("promote").onclick = function () {
 document.getElementById("demote").onclick = function () {
     if(username == "root") {
         var demotionUsername = document.getElementById("demote-username").value;
-        httpPutAsync("/myStocks-2.0.3.RELEASE/myStocks/users/demote/" + demotionUsername, function(data) {
+        httpPutAsync("/ciseSeniorProject/users/demote/" + demotionUsername, function(data) {
             console.log(data);
                 if (data >= 300) {
                     alert("Something went wrong, please try again");
                 } else {
-                    window.location.assign("/myStocks-2.0.3.RELEASE/views/admin.html");
+                    window.location.assign("/views/admin.html");
                 }
         });
     } 
     else {
         alert("Only the root admin can perform this operation");
-        window.location.assign("/myStocks-2.0.3.RELEASE/views/admin.html");
+        window.location.assign("/views/admin.html");
     }
 }
 
@@ -86,7 +86,7 @@ document.getElementById("favorites").onclick = function () {
     }
 
     var favoritesUsername = document.getElementById("get-favorites").value;
-    httpGetAsync("/myStocks-2.0.3.RELEASE/myStocks/favorite/" + favoritesUsername, function(data) {
+    httpGetAsync("/ciseSeniorProject/favorite/" + favoritesUsername, function(data) {
        for(var i = 0; i < data.length; i++) {
             var favorite = document.createElement("li");
             favorite.innerText = data[i];

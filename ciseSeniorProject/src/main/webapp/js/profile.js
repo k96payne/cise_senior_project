@@ -1,7 +1,7 @@
 var username = undefined;
 
 if (!isLoggedIn()) 
-    window.location.assign('/myStocks-2.0.3.RELEASE/views/signin.html');
+    window.location.assign('/views/signin.html');
 else {
     document.getElementById("logged").innerHTML = "Log Out";
 }
@@ -55,7 +55,7 @@ function httpDeleteAsync(theUrl, callback) {
     xmlHttp.send(null);
 }
 
-httpGetAsync("/myStocks-2.0.3.RELEASE/myStocks/users/"+username, function(data){
+httpGetAsync("/ciseSeniorProject/users/"+username, function(data){
     console.log(data);
     var fname = data.fname;
     var lname = data.lname;
@@ -72,7 +72,7 @@ document.getElementById("update").onclick = function () {
     var password = document.getElementById("update-password").value;
     var fname = document.getElementById("update-fname").value;
     var lname = document.getElementById("update-lname").value;
-    var url = "/myStocks-2.0.3.RELEASE/myStocks/users";
+    var url = "/ciseSeniorProject/users";
 
     if(fname == null || fname == "" || lname == null || lname == "" || email == null || 
         email == "" || password == null || password == "") {
@@ -91,20 +91,20 @@ document.getElementById("update").onclick = function () {
 	            if (data >= 300) {
 	                alert("Something went wrong....");
 	            } else {
-	                window.location.assign("/myStocks-2.0.3.RELEASE/views/profile.html")
+	                window.location.assign("/views/profile.html")
 	            }
 	    });
    }
 }
 
 document.getElementById("delete").onclick = function () {
-    httpDeleteAsync("/myStocks-2.0.3.RELEASE/myStocks/users/" + username, function(data) {
+    httpDeleteAsync("/ciseSeniorProject/users/" + username, function(data) {
         console.log(data);
             if (data >= 300) {
                 document.getElementById("targ").innerHTML = "Please try again....";
             } else {
             	document.cookie="username=;path=/;"
-                window.location.assign("/myStocks-2.0.3.RELEASE/views/signin.html")
+                window.location.assign("/views/signin.html")
             }
     });
 }

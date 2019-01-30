@@ -32,7 +32,7 @@ var username = undefined;
 var stockName = undefined;
 
 if (!isLoggedIn()) 
-    window.location.assign('/myStocks-2.0.3.RELEASE/views/signin.html');
+    window.location.assign('/views/signin.html');
 else {
     document.getElementById("logged").innerHTML = "Log Out";
 }
@@ -62,7 +62,7 @@ function getStockId() {
 stockName = getStockId();
 
 function generateStockQueries() {
-	var queryString = "/myStocks-2.0.3.RELEASE/myStocks/stocks?datasetSize=99";
+	var queryString = "/ciseSeniorProject/stocks?datasetSize=99";
 		queryString += "&tickerSymbol=" + stockName;
 	return queryString;
 }
@@ -144,7 +144,7 @@ function createTile(data, pts){
         console.log(data);
         document.cookie = "stockId=" + stockName + ";path=/;";
         console.log(document.cookie);
-            window.location.assign("/myStocks-2.0.3.RELEASE")
+            window.location.assign("/ciseSeniorProject-2.0.3.RELEASE")
     }
     card5.classList.add("btn");
     card5.classList.add("btn-outline-primary");
@@ -158,7 +158,7 @@ function createTile(data, pts){
         requestObject.username = username;
 	    requestObject.tickerSymbol = stockName;
         
-        httpPostAsync("/myStocks-2.0.3.RELEASE/myStocks/favorite", requestObject, function(data) {
+        httpPostAsync("/ciseSeniorProject/favorite", requestObject, function(data) {
             if(data < 300) {
                 alert("Stock " + stockName + " added to favorites");
             } else {
@@ -219,7 +219,7 @@ httpGetAsync(generateStockQueries(), function (data) {
 
 
 
-// httpGetAsync("/myStocks-2.0.3.RELEASE/store/items", function (data) {
+// httpGetAsync("/store/items", function (data) {
 //     var itemId = getItemId();
 //     for (var i = 0; i < data.length; i++) {
 //         if (data[i].itemId == itemId) {
@@ -253,13 +253,13 @@ httpGetAsync(generateStockQueries(), function (data) {
 //             var card5 = document.createElement("a");
 //             card5.onclick = function () {
 //                 if(isLoggedIn()){
-//                     var url = '/myStocks-2.0.3.RELEASE/store/carts?productId='+ item.itemId +'&username=' + username;
+//                     var url = '/store/carts?productId='+ item.itemId +'&username=' + username;
 //                     httpPostAsync(url, function(data){});
 
 
-//                     window.location.assign("/myStocks-2.0.3.RELEASE/")
+//                     window.location.assign("/")
 //                 }
-//                 else window.location.assign("/myStocks-2.0.3.RELEASE/views/signin.html")
+//                 else window.location.assign("/views/signin.html")
 //             }
 //             card5.classList.add("btn");
 //             card5.classList.add("btn-primary");
@@ -268,7 +268,7 @@ httpGetAsync(generateStockQueries(), function (data) {
 
 //             var card6 = document.createElement("a");
 //             card6.onclick = function () {
-//                     window.location.assign("/myStocks-2.0.3.RELEASE/#")
+//                     window.location.assign("/#")
 //             }
 //             card6.classList.add("btn");
 //             card6.classList.add("btn-primary");

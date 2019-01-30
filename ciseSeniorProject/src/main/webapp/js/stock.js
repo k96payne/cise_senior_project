@@ -28,7 +28,7 @@
 var username = undefined;
 
 if (!isLoggedIn()) 
-    window.location.assign('/myStocks-2.0.3.RELEASE/views/signin.html');
+    window.location.assign('/views/signin.html');
 else {
     document.getElementById("logged").innerHTML = "Log Out";
 }
@@ -59,7 +59,7 @@ var itemId = getStockId();
 // var item = undefined;
 // var username = undefined;
 
-// httpGetAsync("/myStocks-2.0.3.RELEASE/store/items", function (data) {
+// httpGetAsync("/store/items", function (data) {
 //     var itemId = getItemId();
 //     for (var i = 0; i < data.length; i++) {
 //         if (data[i].itemId == itemId) {
@@ -93,13 +93,13 @@ var itemId = getStockId();
 //             var card5 = document.createElement("a");
 //             card5.onclick = function () {
 //                 if(isLoggedIn()){
-//                     var url = '/myStocks-2.0.3.RELEASE/store/carts?productId='+ item.itemId +'&username=' + username;
+//                     var url = '/store/carts?productId='+ item.itemId +'&username=' + username;
 //                     httpPostAsync(url, function(data){});
 
 
-//                     window.location.assign("/myStocks-2.0.3.RELEASE/")
+//                     window.location.assign("/")
 //                 }
-//                 else window.location.assign("/myStocks-2.0.3.RELEASE/views/signin.html")
+//                 else window.location.assign("/views/signin.html")
 //             }
 //             card5.classList.add("btn");
 //             card5.classList.add("btn-primary");
@@ -108,7 +108,7 @@ var itemId = getStockId();
 
 //             var card6 = document.createElement("a");
 //             card6.onclick = function () {
-//                     window.location.assign("/myStocks-2.0.3.RELEASE/#")
+//                     window.location.assign("/#")
 //             }
 //             card6.classList.add("btn");
 //             card6.classList.add("btn-primary");
