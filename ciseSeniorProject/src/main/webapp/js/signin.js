@@ -14,7 +14,7 @@ function httpGetAsync(theUrl, callback) {
 }
 
 document.getElementById("create-account").onclick = function () {
-    window.location.assign("/views/signup.html")
+    window.location.assign("./signup.html")
 }
 
 document.getElementById("sign-in").onclick = function () {
@@ -24,7 +24,7 @@ document.getElementById("sign-in").onclick = function () {
     //var encrypted = CryptoJS.AES.encrypt('my message', 'secret key 123').toString();
     //console.log(encrypted);
     console.log("Checking if " + username + " exists....");
-    var url = '/ciseSeniorProject/users/' + username;
+    var url = '../ciseSeniorProject/users/' + username;
     httpGetAsync(url, function (data) {
         var encrypted = data.password;
         var decrypted = CryptoJS.AES.decrypt(encrypted, 'web-apps');
@@ -32,38 +32,16 @@ document.getElementById("sign-in").onclick = function () {
         if (data.username == "NA") {
             console.log(username + " does not exist, must sign up!");
             document.cookie = "username=;";
-            window.location.assign("/views/signup.html");
+            window.location.assign("./signup.html");
         } else if (compare != password) {
             alert("Password Incorrect, Try Again.");
         } else {
             document.cookie = "username=" + username + ";path=/;";
             if (data.isAdmin == 1) {
-                window.location.assign("/views/admin.html");
+                window.location.assign("./admin.html");
             } else {
-                window.location.assign("/index.html");
+                window.location.assign("../index.html");
             }
         }
     })
-
-    // httpGetAsync(url, function(data){
-    //     if(data.userExists == "false"){
-    //         console.log(username + " does not exist, must sign up!");
-    //         document.cookie = "username=;";
-    //         window.location.assign("/views/signup.html");
-    //     }
-    //     else if(data.valid == "false") {
-    //         alert("Password Incorrect, Try Again.");
-    //     }
-    //     else{
-    //         document.cookie = "username=" + username + ";path=/;";
-    //         if(data.isAdmin == "true") {
-    //             window.location.assign("/views/admin.html");
-    //         } else {
-    //             window.location.assign("/index.html");
-    //         }     
-    //     }
-    //     var x = document.cookie;
-    //     console.log("printing out the cookie -------> " + x);
-
-    // });
 };

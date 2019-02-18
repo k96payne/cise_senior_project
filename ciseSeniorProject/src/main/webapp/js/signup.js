@@ -21,7 +21,7 @@ document.getElementById("sign-up").onclick = function () {
     var email = document.getElementById("email").value;
     var fname = document.getElementById("fname").value;
     var lname = document.getElementById("lname").value;
-    var url = "/ciseSeniorProject/users";
+    var url = "../ciseSeniorProject/users";
     var encrypted = CryptoJS.AES.encrypt(password, 'web-apps').toString();
     console.log(encrypted);
 
@@ -38,7 +38,7 @@ document.getElementById("sign-up").onclick = function () {
         }
         else{
             document.cookie = "username=" + username + ";path=/;"
-            window.location.assign("/index.html")
+            window.location.assign("../index.html")
         }
     });
 }

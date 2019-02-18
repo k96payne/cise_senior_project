@@ -1,15 +1,16 @@
 
 
+var stocks = ["AAPL", "MSFT", "TSLA", "FB", "AMZN", "NFLX", "TWTR", "NVDA", "GOOGL"];
 var username = undefined;
-var stocks = undefined;
 var serverData = undefined;
 var stockData = undefined;
 
 if (!isLoggedIn()) 
-    window.location.assign('./signin.html');
+    window.location.assign('./views/signin.html');
 else {
     document.getElementById("logged").innerHTML = "Log Out";
 }
+
 
 document.getElementById("logged").onclick = function() {
     if(isLoggedIn()){
@@ -17,24 +18,12 @@ document.getElementById("logged").onclick = function() {
     }
 }
 
-httpGetAsync("../ciseSeniorProject/favorite/" + username, function(data) {
-    stocks = data;
-    httpGetAsync(generateStockQueries(), function (data) {
-        stockData = data;
-        clearDOM();
-        populateDOM(data, 0);
-        document.getElementsByClassName("spinner")[0].hidden = true;
-        document.getElementById("loadingStockText").hidden = true;
-    });
-});
-
 function httpGetAsync(theUrl, callback) {
     var xmlHttp = new XMLHttpRequest();
     xmlHttp.onreadystatechange = function () {
         if (xmlHttp.readyState == 4 && xmlHttp.status == 200) {
             let resultData = JSON.parse(xmlHttp.responseText);
-            console.log(resultData, typeof (resultData));
-            console.log(resultData.length);
+            //console.log(resultData.length);
             callback(resultData);
         }
     }
@@ -42,8 +31,19 @@ function httpGetAsync(theUrl, callback) {
     xmlHttp.send(null);
 }
 
+
+
+httpGetAsync(generateStockQueries(), function (data) {
+    stockData = [...data];
+    console.log(stockData);
+    clearDOM();
+    populateDOM(data, 0);
+    document.getElementsByClassName("spinner")[0].hidden = true;
+    document.getElementById("loadingStockText").hidden = true;
+});
+
 function generateStockQueries() {
-	var queryString = "../ciseSeniorProject/stocks?datasetSize=50";
+	var queryString = "./ciseSeniorProject/stocks?datasetSize=50";
 	for(var i = 0; i < stocks.length; i++) {
 		queryString += "&tickerSymbol=" + stocks[i];
 	}
@@ -74,49 +74,71 @@ function clearDOM() {
     start.innerHTML = "";
 }
 
+
 function createList(data) {
+    //console.log("here:" + data[0]);
 
     var start = document.getElementById("myparent");
+    var card = document.createElement("div");
+    card.classList.add("card");
+    card.classList.add("border-secondary", "mb-1");
+    start.appendChild(card);
+
     var cardStart = document.createElement("div");
-    cardStart.classList.add("card");
-    start.appendChild(cardStart);
+    cardStart.classList.add("row");
+    card.appendChild(cardStart);
 
-    var card2 = document.createElement("div");
-    card2.classList.add("card-body");
-    cardStart.appendChild(card2);
+    var col1 = document.createElement("div");
+    col1.classList.add("col");
+    cardStart.appendChild(col1);
+    
+    var stockTitle = document.createElement("h2");
+    stockTitle.id = "list-title";
+    stockTitle.innerHTML = data[0];
+    col1.appendChild(stockTitle);
 
-    var card3 = document.createElement("h5");
-    card3.classList.add("card-title");
-    card3.innerHTML = data.name;
-    card2.appendChild(card3);
-
-    var card4 = document.createElement("p");
-    card4.classList.add("card-text");
-    card4.innerHTML = data.shortDescription;
-    card2.appendChild(card4);
-
+    var col2 = document.createElement("div");
+    col2.classList.add("col");
+    col2.id = "list-stock-buttons";
+    cardStart.appendChild(col2);
 
     var card5 = document.createElement("a");
-    card5.classList.add("text-right");
+    card5.onclick = function () {
+        document.cookie = "stockId=" + data[0] + ";path=/;";
+        console.log(document.cookie);
+            window.location.assign("./views/details.html")
+    }
     card5.classList.add("btn");
     card5.classList.add("btn-outline-primary");
-    card5.onclick = function () {
-        var x = document.cookie;
-        document.cookie = "itemId=" + data.itemId + ";path=/;"
-        console.log(x);
-        if(isLoggedIn()){
-            window.location.assign("./details.html")
-        }
-        else window.location.assign("./signin.html")
-    }
-    card5.innerHTML = "View Details";
-    card2.appendChild(card5);
+    card5.classList.add("stock-buttons");
+    card5.innerHTML = "Details";
+    col2.appendChild(card5);
 
+    var card6 = document.createElement("a");
+    card6.onclick = function () {
+        var requestObject = {};
+	    requestObject.tickerSymbol = data[0];
+        requestObject.username = username;
+        httpPostAsync("./ciseSeniorProject/favorite", requestObject, function(data) {
+            if(data < 300) {
+                alert("Stock " + data[0] + " added to favorites");
+            } else {
+                alert("Something went wrong");
+            }
+        });
+    }
+    card6.classList.add("btn");
+    card6.classList.add("btn-outline-primary");
+    card6.classList.add("stock-buttons");
+    card6.innerHTML = "Favorite Stock";
+    col2.appendChild(card6);
 }
 
 function createTile(data) {
+    //console.log(data);
     var stockName = data[0];
-    data.splice(0,1);
+    var cdata = data.slice();
+    cdata.splice(0,1);
     var start = document.getElementById("tilestart");
     var cardStart = document.createElement("div");
     cardStart.classList.add("card");
@@ -127,14 +149,14 @@ function createTile(data) {
     var insert = document.createElement("canvas");
     insert.id = "chart";
     cardStart.appendChild(insert);
-    console.log(insert);
+    //console.log(insert);
     //var ctx = $("#myChart");
     var label = [];
-    for(var i = 0; i < data.length; i++){
+    for(var i = 0; i < cdata.length; i++){
         label.push("");
     }
     var bgc = "";
-    if(data[0]<data[data.length-1]){
+    if(cdata[0]<cdata[cdata.length-1]){
         bgc = 'rgba(68, 132, 206, 0.6)';
     }
     else {
@@ -147,7 +169,7 @@ function createTile(data) {
             labels: label,
             datasets: [{
                 label: 'Closing value',
-                data: data,
+                data: cdata,
                 borderWidth: 1,
                 backgroundColor: bgc,
             }],
@@ -177,7 +199,7 @@ function createTile(data) {
         console.log(data);
         document.cookie = "stockId=" + stockName + ";path=/;";
         console.log(document.cookie);
-        window.location.assign("./details.html")
+            window.location.assign("./views/details.html")
     }
     card5.classList.add("btn");
     card5.classList.add("btn-outline-primary");
@@ -190,10 +212,9 @@ function createTile(data) {
         var requestObject = {};
 	    requestObject.tickerSymbol = stockName;
         requestObject.username = username;
-        httpDeleteAsync("../ciseSeniorProject/favorite/", requestObject, function(data) {
+        httpPostAsync("./ciseSeniorProject/favorite", requestObject, function(data) {
             if(data < 300) {
-                alert("Stock " + stockName + " removed from favorites");
-                window.location.assign("./favorites.html")
+                alert("Stock " + stockName + " added to favorites");
             } else {
                 alert("Something went wrong");
             }
@@ -202,7 +223,7 @@ function createTile(data) {
     card6.classList.add("btn");
     card6.classList.add("btn-outline-primary");
     card6.classList.add("stock-buttons");
-    card6.innerHTML = "Remove";
+    card6.innerHTML = "Favorite Stock";
     card2.appendChild(card6);
 
 }
@@ -229,7 +250,7 @@ function isLoggedIn() {
     return false;
 }
 
-function httpDeleteAsync(theUrl, requestObject, callback) {
+function httpPostAsync(theUrl, requestObject, callback) {
     var xmlHttp = new XMLHttpRequest();
     xmlHttp.onreadystatechange = function () {
         if (xmlHttp.readyState == 4 && xmlHttp.status < 300) {
@@ -239,7 +260,7 @@ function httpDeleteAsync(theUrl, requestObject, callback) {
             callback(xmlHttp.status);
         
     }
-    xmlHttp.open("DELETE", theUrl, true); // true for asynchronous 
+    xmlHttp.open("POST", theUrl, true); // true for asynchronous 
     xmlHttp.setRequestHeader("Content-Type", "application/json");
     xmlHttp.send(JSON.stringify(requestObject));
 }

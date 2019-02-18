@@ -4,13 +4,17 @@
   }
   
   .stock-buttons {
-    background-color: rgba(249, 190, 2, 0.9);
-    border-color: rgba(249, 190, 2, 0.9);
+    background-color: rgba(249, 207, 0, 0.9);
+    border-color: rgba(249, 207, 0, 0.9);
     letter-spacing: 1.5px;
     text-transform: uppercase;
     font-size: 1vw;
     width: 47%;
-    color: white;
+  }
+  
+  .stock-buttons:hover {
+    background-color: rgb(232, 192, 0);
+    border-color: rgb(232, 192, 0);
   }
 
   #data-buttons {
@@ -38,24 +42,30 @@
   
   #logged:hover {
     color: white;
-    background-color: rgb(229, 175, 0);
+    background-color: rgb(244, 98, 65);
     background-image: none;
     border-color: rgba(0,0,0,0);
   }
   
   #logged {
     min-width: 0;
-    color: rgb(229, 175, 0);
+    color: rgb(244, 98, 65);
     background-color: transparent;
     background-image: none;
-    border-color: rgb(229, 175, 0);
+    border-color: rgb(244, 98, 65);
   }
+  
   
   .card-deck .card {
     min-width: 25%;
     margin-bottom: 10px;
     padding-right: 10px;
     padding-left: 10px;
+  }
+
+  .card-body {
+    padding: 1.25rem;
+    color: white;
   }
 
   html {

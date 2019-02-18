@@ -28,7 +28,7 @@
 var username = undefined;
 
 if (!isLoggedIn()) 
-    window.location.assign('/views/signin.html');
+    window.location.assign('/ciseSeniorProject-2.0.3.RELEASE/views/signin.html');
 else {
     document.getElementById("logged").innerHTML = "Log Out";
 }
@@ -99,7 +99,7 @@ var itemId = getStockId();
 
 //                     window.location.assign("/")
 //                 }
-//                 else window.location.assign("/views/signin.html")
+//                 else window.location.assign("/ciseSeniorProject-2.0.3.RELEASE/views/signin.html")
 //             }
 //             card5.classList.add("btn");
 //             card5.classList.add("btn-primary");
@@ -108,7 +108,7 @@ var itemId = getStockId();
 
 //             var card6 = document.createElement("a");
 //             card6.onclick = function () {
-//                     window.location.assign("/#")
+//                     window.location.assign("/ciseSeniorProject-2.0.3.RELEASE/index.html")
 //             }
 //             card6.classList.add("btn");
 //             card6.classList.add("btn-primary");

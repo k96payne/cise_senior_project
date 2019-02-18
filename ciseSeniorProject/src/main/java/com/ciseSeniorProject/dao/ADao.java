@@ -3,15 +3,26 @@ package com.ciseSeniorProject.dao;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 
 public abstract class ADao {
+	
+//	private static final String DRIVER_CLASS_NAME = "com.mysql.jdbc.Driver";
+//	private static final String DB_USERNAME = "root";
+//	private static final String DB_PASSWORD = "password";
+//	private static final String URL = "jdbc:mysql://localhost:3306/mystocks?useSSL="
+//			+ "false&allowPublicKeyRetrieval=true";
 	  
-	  public ADao() {}
-	  
-	  public DriverManagerDataSource getDataSource() {
-	    DriverManagerDataSource dataSource = new DriverManagerDataSource();
-	    dataSource.setDriverClassName("com.mysql.jdbc.Driver");
-	    dataSource.setUrl("jdbc:mysql://mystocksinstance.cplsnpgvjcmw.us-east-1.rds.amazonaws.com:3306/mystocks");
-	    dataSource.setUsername("root");
+	public ADao() {}
+	 
+	public DriverManagerDataSource getDataSource() {
+		DriverManagerDataSource dataSource = new DriverManagerDataSource();
+	   	 dataSource.setDriverClassName("com.mysql.jdbc.Driver");
+	   	 dataSource.setUrl("jdbc:mysql://mystocksinstance.cplsnpgvjcmw.us-east-1.rds.amazonaws.com:3306/mystocks");
+	    	dataSource.setUsername("root");
 	    dataSource.setPassword("AmazonSqlPassword");
-	    return dataSource;
+//		DriverManagerDataSource dataSource = new DriverManagerDataSource();
+//		dataSource.setDriverClassName(DRIVER_CLASS_NAME);
+//		dataSource.setUrl(URL);
+//		dataSource.setUsername(DB_USERNAME);
+//		dataSource.setPassword(DB_PASSWORD);
+		return dataSource;
 	  }
 }

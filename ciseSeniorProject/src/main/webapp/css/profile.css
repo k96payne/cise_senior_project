@@ -17,7 +17,7 @@ body {
 }
 
 .card {
-  background-color: rgba(124, 219, 213, 0.8);
+  background-color: rgba(68, 132, 206, 0.8);
   border-color:  rgba(0,0,0, 0.0);
   height: 100%;
 }
@@ -43,12 +43,12 @@ body {
   letter-spacing: 1.5px;
   margin-top: 30px;
   color: #fff;
-  background-color: rgba(249, 190, 2, 0.9);
+  background-color: rgba(249, 207, 0, 0.9);
   border-color: rgba(0,0,0,0);
 }
 
 .btn-primary:hover {
-  background-color: rgba(229, 175, 0, 0.9);
+  background-color: rgb(232, 192, 0);
   border-color: rgba(0,0,0,0);
 }
 
@@ -59,28 +59,28 @@ body {
   margin-bottom: 15px;
   margin-right: 30px;
   color: #fff;
-  background-color: rgba(245, 50, 64, 0.9);
+  background-color: rgb(244, 98, 65);
   border-color: rgba(0,0,0,0);
 }
 
 #delete:hover {
-  background-color: rgba(206, 45, 56, 0.9);
+  background-color: rgb(219, 92, 63);
   border-color: rgba(0,0,0,0);
 }
 
 #logged:hover {
   color: white;
-  background-color: rgb(229, 175, 0);
+  background-color: rgb(244, 98, 65);
   background-image: none;
   border-color: rgba(0,0,0,0);
 }
 
 #logged {
   min-width: 0;
-  color: rgb(229, 175, 0);
+  color: rgb(244, 98, 65);
   background-color: transparent;
   background-image: none;
-  border-color: rgb(229, 175, 0);
+  border-color: rgb(244, 98, 65);
 }
 
 #intro{

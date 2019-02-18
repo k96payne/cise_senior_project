@@ -32,7 +32,7 @@ var username = undefined;
 var stockName = undefined;
 
 if (!isLoggedIn()) 
-    window.location.assign('/views/signin.html');
+    window.location.assign('./signin.html');
 else {
     document.getElementById("logged").innerHTML = "Log Out";
 }
@@ -62,7 +62,7 @@ function getStockId() {
 stockName = getStockId();
 
 function generateStockQueries() {
-	var queryString = "/ciseSeniorProject/stocks?datasetSize=99";
+	var queryString = "../ciseSeniorProject/stocks?datasetSize=99";
 		queryString += "&tickerSymbol=" + stockName;
 	return queryString;
 }
@@ -94,18 +94,17 @@ function createTile(data, pts){
     var insert = document.createElement("canvas");
     insert.id = "chart";
     cardStart.appendChild(insert);
-    //console.log(insert);
-    //var ctx = $("#myChart");
+    data.reverse();
     var label = [];
     for(var i = 0; i < data.length; i++){
         label.push("");
     }
     var bgc = "";
     if(data[0]<data[data.length-1]){
-        bgc = 'rgba(2, 200, 167, 0.4)';
+        bgc = 'rgba(68, 132, 206, 0.6)';
     }
     else {
-        bgc = 'rgba(245, 52, 32, 0.4)';
+        bgc = 'rgba(241, 159, 77, 0.8)';
     }
 
     var myChart = new Chart(insert, {
@@ -144,7 +143,7 @@ function createTile(data, pts){
         console.log(data);
         document.cookie = "stockId=" + stockName + ";path=/;";
         console.log(document.cookie);
-            window.location.assign("/ciseSeniorProject-2.0.3.RELEASE")
+            window.location.assign("../index.html")
     }
     card5.classList.add("btn");
     card5.classList.add("btn-outline-primary");
@@ -158,7 +157,7 @@ function createTile(data, pts){
         requestObject.username = username;
 	    requestObject.tickerSymbol = stockName;
         
-        httpPostAsync("/ciseSeniorProject/favorite", requestObject, function(data) {
+        httpPostAsync("../ciseSeniorProject/favorite", requestObject, function(data) {
             if(data < 300) {
                 alert("Stock " + stockName + " added to favorites");
             } else {
@@ -216,68 +215,6 @@ httpGetAsync(generateStockQueries(), function (data) {
     populateDOM(stockData,50);
 });
 
-
-
-
-// httpGetAsync("/store/items", function (data) {
-//     var itemId = getItemId();
-//     for (var i = 0; i < data.length; i++) {
-//         if (data[i].itemId == itemId) {
-//             item = data[i];
-//             console.log(item);
-//             var start = document.getElementById("myparent");
-//             var child1 = document.createElement("div");
-//             child1.classList.add("text-center");
-//             start.appendChild(child1);
-//             var title = document.createElement("h1");
-//             title.classList.add("bold");
-//             title.classList.add("text-dark");
-//             title.innerHTML = item.name;
-//             child1.appendChild(title);
-//             var desc = document.createElement("h3");
-//             desc.classList.add("italic");
-//             desc.innerHTML= item.shortDescription;
-//             child1.appendChild(desc);
-//             var details = document.createElement("p");
-//             details.innerHTML= "Brand: " + item.brandName + "<br>Size: " + item.size + "<br>Color: " + item.color + "<br>Gender: " + item.gender;
-//             child1.appendChild(details);
-//             var price = document.createElement("p");
-//             price.classList.add("italic");
-//             price.innerHTML = "Price: <b><em>$ " + item.msrp + "</em></b>";
-//             child1.appendChild(price);
-//             var sale = document.createElement("h2");
-//             sale.id = "sale";
-//             sale.innerHTML = "SALE: $" + item.salePrice; 
-//             child1.appendChild(sale);
-
-//             var card5 = document.createElement("a");
-//             card5.onclick = function () {
-//                 if(isLoggedIn()){
-//                     var url = '/store/carts?productId='+ item.itemId +'&username=' + username;
-//                     httpPostAsync(url, function(data){});
-
-
-//                     window.location.assign("/")
-//                 }
-//                 else window.location.assign("/views/signin.html")
-//             }
-//             card5.classList.add("btn");
-//             card5.classList.add("btn-primary");
-//             card5.innerHTML = "<b>Add to cart</b>";
-//             child1.appendChild(card5);
-
-//             var card6 = document.createElement("a");
-//             card6.onclick = function () {
-//                     window.location.assign("/#")
-//             }
-//             card6.classList.add("btn");
-//             card6.classList.add("btn-primary");
-//             card6.innerHTML = "<b>Go back</b>";
-//             child1.appendChild(card6);
-
-//         }
-//     }
-// });
 
 function isLoggedIn() {
     var cookies = document.cookie.split(';');

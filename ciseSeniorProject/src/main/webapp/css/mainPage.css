@@ -50,8 +50,8 @@ html {
 }
 
 .stock-buttons {
-  background-color: rgba(249, 190, 2, 0.9);
-  border-color: rgba(249, 190, 2, 0.9);
+  background-color: rgba(249, 207, 0, 0.9);
+  border-color: rgba(249, 207, 0, 0.9);
   letter-spacing: 1.5px;
   text-transform: uppercase;
   font-size: 1vw;
@@ -59,8 +59,8 @@ html {
 }
 
 .stock-buttons:hover {
-  background-color: rgba(229, 175, 0, 0.9);
-  border-color: rgba(229, 175, 0, 0.9);
+  background-color: rgb(232, 192, 0);
+  border-color: rgb(232, 192, 0);
 }
 
 .stock-titles {
@@ -72,17 +72,75 @@ html {
 
 #logged:hover {
   color: white;
-  background-color: rgb(229, 175, 0);
+  background-color: rgb(244, 98, 65);
   background-image: none;
   border-color: rgba(0,0,0,0);
 }
 
 #logged {
   min-width: 0;
-  color: rgb(229, 175, 0);
+  color: rgb(244, 98, 65);
   background-color: transparent;
   background-image: none;
-  border-color: rgb(229, 175, 0);
+  border-color: rgb(244, 98, 65);
 }
 
+#loadingStockText {
+  width: 100%;
+  margin: 0 auto;
+  color: rgb(244, 98, 65);
+  text-align: center;
+}
 
+.spinner {
+  margin: 10px auto;
+  width: 50px;
+  height: 40px;
+  text-align: center;
+  font-size: 10px;
+}
+
+.spinner > div {
+  background-color: rgb(244, 98, 65);
+  height: 100%;
+  width: 6px;
+  display: inline-block;
+  
+  -webkit-animation: sk-stretchdelay 1.2s infinite ease-in-out;
+  animation: sk-stretchdelay 1.2s infinite ease-in-out;
+}
+
+.spinner .rect2 {
+  -webkit-animation-delay: -1.1s;
+  animation-delay: -1.1s;
+}
+
+.spinner .rect3 {
+  -webkit-animation-delay: -1.0s;
+  animation-delay: -1.0s;
+}
+
+.spinner .rect4 {
+  -webkit-animation-delay: -0.9s;
+  animation-delay: -0.9s;
+}
+
+.spinner .rect5 {
+  -webkit-animation-delay: -0.8s;
+  animation-delay: -0.8s;
+}
+
+@-webkit-keyframes sk-stretchdelay {
+  0%, 40%, 100% { -webkit-transform: scaleY(0.4) }  
+  20% { -webkit-transform: scaleY(1.0) }
+}
+
+@keyframes sk-stretchdelay {
+  0%, 40%, 100% { 
+    transform: scaleY(0.4);
+    -webkit-transform: scaleY(0.4);
+  }  20% { 
+    transform: scaleY(1.0);
+    -webkit-transform: scaleY(1.0);
+  }
+}

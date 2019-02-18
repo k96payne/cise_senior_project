@@ -4,9 +4,9 @@ var serverData = undefined;
 var stockData = undefined;
 
 if (!isLoggedIn())
-    window.location.assign('/views/signin.html');
+    window.location.assign('/ciseSeniorProject-2.0.3.RELEASE/views/signin.html');
 
-httpGetAsync("/ciseSeniorProject/favorite/" + username, function(data) {
+httpGetAsync("/ciseSeniorProject-2.0.3.RELEASE/ciseSeniorProject/favorite/" + username, function(data) {
     stocks = data;
     httpGetAsync(generateStockQueries(), function (data) {
         stockData = data;
@@ -30,7 +30,7 @@ function httpGetAsync(theUrl, callback) {
 }
 
 function generateStockQueries() {
-	var queryString = "/ciseSeniorProject/stocks?datasetSize=50";
+	var queryString = "/ciseSeniorProject-2.0.3.RELEASE/ciseSeniorProject/stocks?datasetSize=50";
 	for(var i = 0; i < stocks.length; i++) {
 		queryString += "&tickerSymbol=" + stocks[i];
 	}
@@ -113,9 +113,9 @@ function createList(data) {
         document.cookie = "itemId=" + data.itemId + ";path=/;"
         console.log(x);
         if(isLoggedIn()){
-            window.location.assign("/views/details.html")
+            window.location.assign("/ciseSeniorProject-2.0.3.RELEASE/views/details.html")
         }
-        else window.location.assign("/views/signin.html")
+        else window.location.assign("/ciseSeniorProject-2.0.3.RELEASE/views/signin.html")
     }
     card5.innerHTML = "View Details";
     card2.appendChild(card5);
@@ -185,7 +185,7 @@ function createTile(data) {
         var x = document.cookie;
         document.cookie = "itemId=" + data.itemId + ";path=/;"
         console.log(x);
-            window.location.assign("/views/details.html")
+            window.location.assign("/ciseSeniorProject-2.0.3.RELEASE/views/details.html")
     }
     card5.classList.add("btn");
     card5.classList.add("btn-outline-primary");
@@ -198,10 +198,10 @@ function createTile(data) {
         var requestObject = {};
 	    requestObject.tickerSymbol = stockName;
         requestObject.username = username;
-        httpDeleteAsync("/ciseSeniorProject/favorite/", requestObject, function(data) {
+        httpDeleteAsync("/ciseSeniorProject-2.0.3.RELEASE/ciseSeniorProject/favorite/", requestObject, function(data) {
             if(data < 300) {
                 alert("Stock " + stockName + " removed from favorites");
-                window.location.assign("/views/favorites.html")
+                window.location.assign("/ciseSeniorProject-2.0.3.RELEASE/views/favorites.html")
             } else {
                 alert("Something went wrong");
             }

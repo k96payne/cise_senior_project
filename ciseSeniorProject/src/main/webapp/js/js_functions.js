@@ -6,7 +6,7 @@ var serverData = undefined;
 var stockData = undefined;
 
 if (!isLoggedIn()) 
-    window.location.assign('/views/signin.html');
+    window.location.assign('/ciseSeniorProject-2.0.3.RELEASE/views/signin.html');
 else {
     document.getElementById("logged").innerHTML = "Log Out";
 }
@@ -30,15 +30,6 @@ function httpGetAsync(theUrl, callback) {
     xmlHttp.send(null);
 }
 
-document.getElementById("option1").onchange = function () {
-    clearDOM();
-    populateDOM(stockData, 0);
-};
-
-document.getElementById("option2").onchange = function () {
-    clearDOM();
-    populateDOM(stockData, 1);
-};
 
 
 httpGetAsync(generateStockQueries(), function (data) {
@@ -46,10 +37,11 @@ httpGetAsync(generateStockQueries(), function (data) {
     console.log(stockData);
     clearDOM();
     populateDOM(data, 0);
+    document.getElementsByClassName("spinner")[0].hidden = true;
 });
 
 function generateStockQueries() {
-	var queryString = "ciseSeniorProject/stocks?datasetSize=50";
+	var queryString = "/ciseSeniorProject-2.0.3.RELEASE/ciseSeniorProject/stocks?datasetSize=50";
 	for(var i = 0; i < stocks.length; i++) {
 		queryString += "&tickerSymbol=" + stocks[i];
 	}
@@ -112,7 +104,7 @@ function createList(data) {
     card5.onclick = function () {
         document.cookie = "stockId=" + data[0] + ";path=/;";
         console.log(document.cookie);
-            window.location.assign("/views/details.html")
+            window.location.assign("/ciseSeniorProject-2.0.3.RELEASE/views/details.html")
     }
     card5.classList.add("btn");
     card5.classList.add("btn-outline-primary");
@@ -125,7 +117,7 @@ function createList(data) {
         var requestObject = {};
 	    requestObject.tickerSymbol = data[0];
         requestObject.username = username;
-        httpPostAsync("ciseSeniorProject/favorite", requestObject, function(data) {
+        httpPostAsync("/ciseSeniorProject-2.0.3.RELEASE/ciseSeniorProject/favorite", requestObject, function(data) {
             if(data < 300) {
                 alert("Stock " + data[0] + " added to favorites");
             } else {
@@ -205,7 +197,7 @@ function createTile(data) {
         console.log(data);
         document.cookie = "stockId=" + stockName + ";path=/;";
         console.log(document.cookie);
-            window.location.assign("/views/details.html")
+            window.location.assign("/ciseSeniorProject-2.0.3.RELEASE/views/details.html")
     }
     card5.classList.add("btn");
     card5.classList.add("btn-outline-primary");
@@ -218,7 +210,7 @@ function createTile(data) {
         var requestObject = {};
 	    requestObject.tickerSymbol = stockName;
         requestObject.username = username;
-        httpPostAsync("ciseSeniorProject/favorite", requestObject, function(data) {
+        httpPostAsync("/ciseSeniorProject-2.0.3.RELEASE/ciseSeniorProject/favorite", requestObject, function(data) {
             if(data < 300) {
                 alert("Stock " + stockName + " added to favorites");
             } else {
