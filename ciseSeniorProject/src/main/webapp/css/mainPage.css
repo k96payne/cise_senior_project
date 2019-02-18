@@ -90,12 +90,13 @@ html {
   margin: 0 auto;
   color: rgb(244, 98, 65);
   text-align: center;
+  font-size: 2rem;
 }
 
 .spinner {
   margin: 10px auto;
-  width: 50px;
-  height: 40px;
+  width: 200px;
+  height: 100px;
   text-align: center;
   font-size: 10px;
 }
@@ -103,9 +104,8 @@ html {
 .spinner > div {
   background-color: rgb(244, 98, 65);
   height: 100%;
-  width: 6px;
+  width: 15px;
   display: inline-block;
-  
   -webkit-animation: sk-stretchdelay 1.2s infinite ease-in-out;
   animation: sk-stretchdelay 1.2s infinite ease-in-out;
 }
