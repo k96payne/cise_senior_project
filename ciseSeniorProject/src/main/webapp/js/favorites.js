@@ -1,9 +1,8 @@
-
-
 var username = undefined;
 var stocks = undefined;
 var serverData = undefined;
 var stockData = undefined;
+var messageDataJSON = undefined;
 
 if (!isLoggedIn()) 
     window.location.assign('./signin.html');
@@ -21,6 +20,19 @@ httpGetAsync("../ciseSeniorProject/favorite/" + username, function(data) {
     stocks = data;
     httpGetAsync(generateStockQueries(), function (data) {
         stockData = data;
+        var messageData = {'stockData': stockData};
+        messageDataJSON = JSON.stringify({
+            'state': {
+                'desired': messageData
+            }
+        })
+        console.log(connected);
+        if(connected == true){
+            console.log("Creating message packet for stock data...")
+            message = new Paho.MQTT.Message(messageDataJSON);
+            message.destinationName = '$aws/things/senior_thing/shadow/update';
+            mqttClient.send(message);
+        }
         clearDOM();
         populateDOM(data, 0);
         document.getElementsByClassName("spinner")[0].hidden = true;
@@ -127,7 +139,7 @@ function createTile(data) {
     var insert = document.createElement("canvas");
     insert.id = "chart";
     cardStart.appendChild(insert);
-    console.log(insert);
+    //console.log(insert);
     //var ctx = $("#myChart");
     var label = [];
     for(var i = 0; i < data.length; i++){

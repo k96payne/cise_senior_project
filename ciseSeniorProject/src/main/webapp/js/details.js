@@ -82,7 +82,7 @@ function clearGraph(){
 }
 
 function createTile(data, pts){
-    data = data.slice(0, pts);
+    data = data.slice(100-pts, 99);
     var start = document.getElementById("tilestart");
     var cardStart = document.createElement("div");
     cardStart.id = "start";
@@ -94,7 +94,7 @@ function createTile(data, pts){
     var insert = document.createElement("canvas");
     insert.id = "chart";
     cardStart.appendChild(insert);
-    data.reverse();
+    //data.reverse();
     var label = [];
     for(var i = 0; i < data.length; i++){
         label.push("");

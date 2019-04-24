@@ -4,6 +4,8 @@ var stocks = ["AAPL", "MSFT", "TSLA", "FB", "AMZN", "NFLX", "TWTR", "NVDA", "GOO
 var username = undefined;
 var serverData = undefined;
 var stockData = undefined;
+var messageDataJSON = undefined;
+var retry = false;
 
 if (!isLoggedIn()) 
     window.location.assign('./views/signin.html');
@@ -36,6 +38,21 @@ function httpGetAsync(theUrl, callback) {
 httpGetAsync(generateStockQueries(), function (data) {
     stockData = [...data];
     console.log(stockData);
+    var messageData = {'stockData': stockData};
+    messageDataJSON = JSON.stringify({
+        'state': {
+            'desired': messageData
+        }
+    })
+    if(connected == true){
+        message = new Paho.MQTT.Message(messageDataJSON);
+        message.destinationName = '$aws/things/senior_thing/shadow/update';
+        mqttClient.send(message);
+    }
+    else{
+        retry == true;
+    }
+
     clearDOM();
     populateDOM(data, 0);
     document.getElementsByClassName("spinner")[0].hidden = true;
